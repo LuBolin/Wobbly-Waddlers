@@ -1,15 +1,23 @@
+class_name LevelManager
 extends Node2D
 
+@onready var inputDelayTimer = $InputDelayTimer # wait time of 1s
 @onready var terrain: TileMapLayer = $Terrain
 
 var walls: Array[Vector2i]
 var quacker: Quacker
 var crates: Array[Crate]
 var crate_coord_array: Array[Array]
+var eggs: Array[Egg]
+var ducklings: Array[Duckling]
+
 var level_size: Vector2
 var level_offset: Vector2i
 var tile_size: Vector2 = Vector2(64, 64);
 
+const MAX_INPUT_BUFFER_SIZE: int = 2
+var input_buffer: Array[InputEventKey]
+var lingering_input: InputEventKey
 
 func _ready():
 	level_size = terrain.get_used_rect().size
@@ -22,50 +30,89 @@ func _ready():
 	
 	walls = terrain.get_used_cells_by_id(0)
 	
-	var quacker_tile_coord = terrain.get_used_cells_by_id(1)[0]
+	var quacker_tile_coord = terrain.get_used_cells_by_id(1)
+	assert(len(quacker_tile_coord) == 1)
+	quacker_tile_coord = quacker_tile_coord[0]
 	terrain.set_cell(quacker_tile_coord, -1)  # Set to -1 to remove the tile
-	var quacker_world_position = tile_to_world(quacker_tile_coord)
+	var quacker_world_pos = tile_to_world(quacker_tile_coord)
 	quacker = Quacker.summonQuacker()
-	quacker.global_position = quacker_world_position
-	get_parent().add_child.call_deferred(quacker)
+
+  for crate_coords in terrain.get_used_cells_by_id(2):
+      #	Regular spawning into world and removing from tilemap
+      var crate_world_pos = tile_to_world(crate_coords)
+      var crate = Crate.summonCrate()
+      crate.global_position = crate_world_pos
+      get_parent().add_child.call_deferred(crate)
+      crates.append(crate)
+      #	Stores crates int crate_coord_array. minus terrain rect since crate coord's anchor is center
+      crate_coord_array[crate_coords.y - level_offset.y][crate_coords.x - level_offset.x] = crate
+      terrain.set_cell(crate_coords, -1)
 	
-	for crate_coords in terrain.get_used_cells_by_id(2):
-		#	Regular spawning into world and removing from tilemap
-		var crate_world_pos = tile_to_world(crate_coords)
-		var crate = Crate.summonCrate()
-		crate.global_position = crate_world_pos
-		get_parent().add_child.call_deferred(crate)
-		crates.append(crate)
-		#	Stores crates int crate_coord_array. minus terrain rect since crate coord's anchor is center
-		crate_coord_array[crate_coords.y - level_offset.y][crate_coords.x - level_offset.x] = crate
-		terrain.set_cell(crate_coords, -1)
-	for row in crate_coord_array:
-			print(row)
-	print(crates)
-	print(walls)
+	for egg_coords in terrain.get_used_cells_by_id(3):
+		var egg_world_pos = tile_to_world(egg_coords)
+		var egg = Egg.summonEgg()
+		egg.global_position = egg_world_pos
+		add_child.call_deferred(egg)
+		eggs.append(egg)
+		terrain.set_cell(egg_coords, -1)
 	
+	await get_tree().process_frame.connect(
+		func():
+			for duckling_coords in terrain.get_used_cells_by_id(4):
+				quacker.addDuckling()
+				terrain.set_cell(duckling_coords, -1)
+	)
+	
+	inputDelayTimer.timeout.connect(handle_input)
 
 func _input(event):
 	if not(event is InputEventKey and event.pressed):
 		return
-		
+	if event.is_action("up") or event.is_action("down") \
+		or event.is_action("left") or event.is_action("right"):
+		input_buffer.append(event)
+	
+	if inputDelayTimer.is_stopped():
+		handle_input()
+
+func handle_input():
+	if input_buffer:
+		lingering_input = input_buffer.front()
+		input_buffer.pop_front()
+	
+	var event = lingering_input
+	if not event:
+		return
+	
+	var anythingMoved = false
+	
 	if event.is_action("up"):
-		quackerMove(Vector2.UP)
+		anythingMoved = quackerMove(Vector2.UP)
 	elif event.is_action("down"):
-		quackerMove(Vector2.DOWN)
+		anythingMoved = quackerMove(Vector2.DOWN)
 	elif event.is_action("left"):
-		quackerMove(Vector2.LEFT)
+		anythingMoved = quackerMove(Vector2.LEFT)
 	elif event.is_action("right"):
-		quackerMove(Vector2.RIGHT)
+		anythingMoved = quackerMove(Vector2.RIGHT)
+	
+	if anythingMoved:
+		inputDelayTimer.start()
 
 
 func quackerMove(direction: Vector2i):
 	var anyMoved = false;
 	var tile_coords = world_to_tile(quacker.position)
 	var target = tile_coords + direction
-	print(target)
+	
 	if target in walls:
 		return false
+	
+	var duckling_tiles = []
+	for duckling in ducklings:
+		duckling_tiles.append(world_to_tile(duckling.position))
+	if target in duckling_tiles:
+		return false
+   
 	elif target in get_crate_tiles():
 		var move_crate_array : Array[Crate]
 		#	appends immediate crate to array
@@ -95,14 +142,17 @@ func quackerMove(direction: Vector2i):
 				var crate_moved = crate.move(crate_target_in_world)
 				update_crate_coord_array(crate_coord.x - level_offset.x, crate_coord.y - level_offset.y, direction)
 				print_crate_coord_array()
-
-		
-		
+      return true
 	else:
-		var target_in_world = tile_to_world(target)
-		var moved = quacker.move(target_in_world)
-		if moved:
-			anyMoved = true;
+    for egg in eggs:
+      if target == world_to_tile(egg.position):
+        egg.hatch()
+        eggs.remove_at(eggs.find(egg))
+
+    var target_in_world = tile_to_world(target)
+    quacker.move(target_in_world, inputDelayTimer.wait_time)
+	  return true
+   return false
 
 
 ### Utility

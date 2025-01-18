@@ -1,6 +1,6 @@
 extends Node3D
 
-# stand initial position
+const lvlFileName = "res://Levels/Level"
 
 @export_range(-5, 5) var stand_x_offset: float
 
@@ -13,3 +13,8 @@ func _ready():
 	# Magic constant
 	%MainCamera3D.position = %Board.position + Vector3(0, 6.5, 0.5)
 	%LevelLabel.text = self.name
+	
+	var level_number: int = int(self.name.substr(len("Level ")))
+	var scene_name = lvlFileName + str(level_number) + "_2D.tscn"
+	var scene = load(scene_name).instantiate()
+	$"2DSubViewport".add_child(scene)

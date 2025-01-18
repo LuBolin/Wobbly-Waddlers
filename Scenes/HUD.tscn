@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://boj2sy3is4apk"]
+[gd_scene load_steps=5 format=3 uid="uid://boj2sy3is4apk"]
 
 [ext_resource type="Script" path="res://Scenes/HUD.gd" id="1_3coau"]
+[ext_resource type="AudioStream" uid="uid://bxlvqwcmn70s5" path="res://Resources/victory.mp3" id="2_r0ekc"]
+[ext_resource type="AudioStream" uid="uid://dcp26nmyeavsh" path="res://Resources/blood.mp3" id="3_4hm51"]
+[ext_resource type="AudioStream" uid="uid://d3ft14baervo6" path="res://Resources/baby_duck.mp3" id="4_jq1wh"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_3coau")
@@ -13,3 +16,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0431373, 0.0980392, 0.0823529, 0.533333)
+
+[node name="VictorySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_r0ekc")
+
+[node name="BloodSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_4hm51")
+
+[node name="HatchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jq1wh")

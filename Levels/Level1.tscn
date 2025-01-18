@@ -1,14 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxqexvr8x1kiy"]
 
 [ext_resource type="PackedScene" uid="uid://bt28qygtuoe15" path="res://3D/3DWorld.tscn" id="1_joyrm"]
-[ext_resource type="PackedScene" uid="uid://b02ilsnj2kong" path="res://Levels/Level1_2D.tscn" id="2_eclrj"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g4hb6"]
 viewport_path = NodePath("2DSubViewport")
 
-[node name="Level 1" instance=ExtResource("1_joyrm")]
+[sub_resource type="Theme" id="Theme_pcj3g"]
 
-[node name="DummyLevel" parent="2DSubViewport" index="0" instance=ExtResource("2_eclrj")]
+[node name="Level 1" instance=ExtResource("1_joyrm")]
 
 [node name="Board" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -17,3 +16,6 @@ max_contacts_reported = 10
 
 [node name="Board" parent="Board" index="2"]
 texture = SubResource("ViewportTexture_g4hb6")
+
+[node name="InfoPanel" parent="Control/HBoxContainer" index="0"]
+theme = SubResource("Theme_pcj3g")

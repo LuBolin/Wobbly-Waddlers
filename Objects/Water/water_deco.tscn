@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://boqisulqnlhol"]
+
+[ext_resource type="SpriteFrames" uid="uid://dwv6denmue1k" path="res://Objects/Water/water_animation.tres" id="1_ujtyn"]
+[ext_resource type="Script" path="res://Objects/Water/water_deco.gd" id="2_6b7et"]
+
+[node name="WaterDeco" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_ujtyn")
+animation = &"flow"
+autoplay = "flow"
+frame_progress = 0.313681
+script = ExtResource("2_6b7et")

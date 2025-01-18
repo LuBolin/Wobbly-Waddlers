@@ -2,6 +2,8 @@ class_name HUD
 extends CanvasLayer
 
 @onready var turnDelayOverlay = $TurnOverlay
+@onready var victory_sound: AudioStreamPlayer2D = $VictorySound
+@onready var blood_sound: AudioStreamPlayer2D = $BloodSound
 
 var finished: bool = false
 
@@ -26,6 +28,7 @@ func win():
 	if finished:
 		return
 	finished = true
+	victory_sound.play()
 	
 	turnDelayOverlay.color = Color(Color.GREEN_YELLOW, 0.3)
 	turnDelayOverlay.visible = true
@@ -37,6 +40,7 @@ func lose():
 	if finished:
 		return
 	finished = true
+	blood_sound.play()
 	
 	turnDelayOverlay.color = Color(Color.RED, 0.5)
 	turnDelayOverlay.visible = true

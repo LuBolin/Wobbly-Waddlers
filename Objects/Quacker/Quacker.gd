@@ -29,6 +29,7 @@ func addDuckling():
 	tail = duckling
 	var parent = get_parent()
 	get_parent().add_child.call_deferred(duckling)
+	get_parent().move_child.call_deferred(duckling, get_index())
 	assert(get_parent() is LevelManager)
 	if get_parent() is LevelManager:
 		get_parent().ducklings.append(duckling)
@@ -88,6 +89,9 @@ func die():
 	if not self.alive:
 		return
 	self.alive = false
+	var blood = Blood.summonBlood()
+	blood.global_position = self.global_position
+	get_parent().add_child(blood)
 	animated_sprite.stop()
 	Singleton.lose.emit()
 	sprite.modulate = Color.DARK_RED

@@ -65,5 +65,8 @@ func tweenToTarget(target_position: Vector2, duration: float):
 	movementTween.set_ease(Tween.EASE_OUT)
 
 func die():
+	var blood = Blood.summonBlood()
+	blood.global_position = self.global_position
+	get_parent().add_child(blood)
 	queue_free()
 	Singleton.lose.emit()

@@ -33,7 +33,6 @@ func renderBeaten():
 		# red_tick
 		var beaten = Singleton.levelsBeaten \
 			and (index+1) in Singleton.levelsBeaten
-		print(Singleton.levelsBeaten)
 		if beaten:
 			if button.get_child_count() > 0:
 				button.get_child(0).visible = true

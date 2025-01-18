@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://buiwb72hhxj2t"]
+
+[ext_resource type="PackedScene" uid="uid://boqisulqnlhol" path="res://Objects/Water/water_deco.tscn" id="1_nrjjn"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_bjurw"]
+scenes/1/scene = ExtResource("1_nrjjn")
+
+[resource]
+tile_size = Vector2i(48, 48)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "water"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/1 = SubResource("TileSetScenesCollectionSource_bjurw")

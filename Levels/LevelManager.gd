@@ -22,6 +22,7 @@ var lingering_input: InputEventKey
 
 var stand_x_val: float
 var ended: bool = false
+var thisLevelNumber: int
 
 func _ready():
 	level_size = terrain.get_used_rect().size
@@ -34,8 +35,10 @@ func _ready():
 	
 	parse_tilemaplayer()
 	
-	Singleton.lose.connect(finish_level)
-	Singleton.win.connect(finish_level)
+	Singleton.lose.connect(lose_handler)
+	Singleton.win.connect(win_handler)
+	
+	thisLevelNumber = int(self.name.substr(len("Level ")))
 
 func parse_tilemaplayer():
 	for i in range(level_size.y):
@@ -134,8 +137,14 @@ func handle_input():
 func quackerMove(direction: Vector2i):
 	var anyMoved = false;
 	var tile_coords = world_to_tile(quacker.position)
-	var target = tile_coords + direction
 	
+	var delta_deg = rad_to_deg(abs(Vector2(direction).angle() - quacker.rotation))
+	delta_deg = snapped(delta_deg, 90)
+	if is_equal_approx(delta_deg, 180):
+		direction = -direction
+	
+	var target = tile_coords + direction
+			
 	if target in walls:
 		return false
 	
@@ -194,9 +203,6 @@ func quackerMove(direction: Vector2i):
 		return true
 	return false
 
-func finish_level():
-	ended = true
-
 func get_torque():
 	var torque_at_1 = 0
 	var entities = [quacker] + ducklings + eggs + crates
@@ -213,6 +219,14 @@ func set_stand_x(x: float):
 	stand_indicator_line.add_point(topPoint)
 	stand_indicator_line.add_point(btmPoint)
 
+func win_handler():
+	ended = true
+	if thisLevelNumber not in Singleton.levelsBeaten:
+		Singleton.levelsBeaten.append(thisLevelNumber)
+		Singleton.save_data()
+
+func lose_handler():
+	ended = true
 
 ### Utility
 func update_crate_coord_array(init_x : int, init_y : int, direction : Vector2):

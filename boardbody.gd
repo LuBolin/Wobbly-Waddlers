@@ -11,9 +11,10 @@ func _process(delta: float) -> void:
 	tilt_board_based_on_masses(delta)
 
 func _input(key: InputEvent):
-	if key is InputEventKey:
-		if key.keycode == KEY_LEFT or key.keycode == KEY_RIGHT:
-			$"../SubViewport/Sample2d".pass_input(key)
+	if key is not InputEventKey:
+		return
+	
+	$"../SubViewport/Sample2d".pass_input(key)
 
 func tilt_board_based_on_masses(delta: float) -> void:
 	var tilt_amount = $"../SubViewport/Sample2d".poll_position()

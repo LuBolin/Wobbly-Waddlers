@@ -37,7 +37,6 @@ func quackerMove(direction: Vector2i):
 	var anyMoved = false;
 	var tile_coords = world_to_tile(quacker.position)
 	var target = tile_coords + direction
-	print("Moving in ", direction)
 	if target in walls:
 		return false
 	else:

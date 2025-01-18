@@ -26,4 +26,3 @@ func tweenToTarget(target_position: Vector2, duration: float):
 	)
 	movementTween.set_trans(Tween.TRANS_LINEAR)
 	movementTween.set_ease(Tween.EASE_OUT)
-	

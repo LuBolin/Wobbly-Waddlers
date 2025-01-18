@@ -10,8 +10,9 @@ static var quacker_instance: Quacker = null
 
 @onready var sprite: Sprite2D = $Sprite
 
-var children_count
+var alive: bool = true
 
+var children_count
 var tail: Node2D
 
 static func summonQuacker():
@@ -32,6 +33,8 @@ func addDuckling():
 		get_parent().ducklings.append(duckling)
 
 func move(target: Vector2):
+	if not alive:
+		return
 	var need_to_rotate = tweenRotation(target, Global.TICK_DURATION/2.0)
 	var translation_tween_duration = Global.TICK_DURATION
 	var wait_time = 0
@@ -45,6 +48,8 @@ func move(target: Vector2):
 	return true
 
 func tweenRotation(target_position, tween_duration):
+	if not alive:
+		return
 	var offset: Vector2 = target_position - self.global_position
 	var target_rotation = offset.angle()
 	var current_rotation: float = self.rotation
@@ -66,6 +71,8 @@ func tweenRotation(target_position, tween_duration):
 	return true
 
 func tweenToTarget(target_position: Vector2, duration: float):
+	if not alive:
+		return
 	var movementTween = get_tree().create_tween()
 	movementTween.tween_property(
 		self,
@@ -75,3 +82,10 @@ func tweenToTarget(target_position: Vector2, duration: float):
 	)
 	movementTween.set_trans(Tween.TRANS_LINEAR)
 	movementTween.set_ease(Tween.EASE_OUT)
+
+func die():
+	if not self.alive:
+		return
+	self.alive = false
+	Singleton.lose.emit()
+	sprite.modulate = Color.DARK_RED

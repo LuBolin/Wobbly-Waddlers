@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://d0aok26koh50p"]
+[gd_scene load_steps=4 format=4 uid="uid://d0aok26koh50p"]
 
 [ext_resource type="Script" path="res://Levels/LevelManager.gd" id="1_ykndm"]
 [ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="2_x0qaq"]
+[ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="3_n0pcc"]
 
 [node name="DummyLevel" type="Node2D"]
 script = ExtResource("1_ykndm")
@@ -14,3 +15,5 @@ tile_set = ExtResource("2_x0qaq")
 
 [node name="InputDelayTimer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="Hud" parent="." instance=ExtResource("3_n0pcc")]

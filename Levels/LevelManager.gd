@@ -19,10 +19,22 @@ const MAX_INPUT_BUFFER_SIZE: int = 2
 var input_buffer: Array[InputEventKey]
 var lingering_input: InputEventKey
 
+var ended: bool = false
+
 func _ready():
 	level_size = terrain.get_used_rect().size
 	level_offset = terrain.get_used_rect().position
 	
+	Singleton.restart.connect(self.restart_level)
+	
+	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
+	inputDelayTimer.timeout.connect(handle_input)
+	
+	parse_tilemaplayer()
+	
+	Singleton.lose.connect(finish_level)
+
+func parse_tilemaplayer():
 	for i in range(level_size.y):
 		crate_coord_array.append([])  
 		for j in range(level_size.x):
@@ -64,21 +76,26 @@ func _ready():
 				quacker.addDuckling()
 				terrain.set_cell(duckling_coords, -1)
 	)
-	
-	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
-	inputDelayTimer.timeout.connect(handle_input)
 
 func _input(event):
 	if not(event is InputEventKey and event.pressed):
 		return
+	
+	if event.is_action("restart"): # not affected by input delay
+		Singleton.restart.emit()
+	
 	if event.is_action("up") or event.is_action("down") \
 		or event.is_action("left") or event.is_action("right"):
-		input_buffer.append(event)
+			if len(input_buffer) < MAX_INPUT_BUFFER_SIZE:
+				input_buffer.append(event)
 	
 	if inputDelayTimer.is_stopped():
 		handle_input()
 
 func handle_input():
+	if ended:
+		return
+		
 	if input_buffer:
 		lingering_input = input_buffer.front()
 		input_buffer.pop_front()
@@ -89,17 +106,26 @@ func handle_input():
 	
 	var anythingMoved = false
 	
+	var direction: Vector2
 	if event.is_action("up"):
-		anythingMoved = quackerMove(Vector2.UP)
+		direction = Vector2.UP
 	elif event.is_action("down"):
-		anythingMoved = quackerMove(Vector2.DOWN)
+		direction = Vector2.DOWN
 	elif event.is_action("left"):
-		anythingMoved = quackerMove(Vector2.LEFT)
+		direction = Vector2.LEFT
 	elif event.is_action("right"):
-		anythingMoved = quackerMove(Vector2.RIGHT)
+		direction = Vector2.RIGHT
 	
-	if anythingMoved:
-		inputDelayTimer.start()
+	anythingMoved = quackerMove(direction)
+	if not anythingMoved:
+		var rotation = quacker.rotation
+		if snapped(rotation, PI/2.0) != direction.angle():
+			var tile_coords = world_to_tile(quacker.position)
+			var target = Vector2(tile_coords) + direction
+			var target_in_world = tile_to_world(target)
+			quacker.tweenRotation(target_in_world, Global.TICK_DURATION / 2.0)
+		quacker.die()
+	inputDelayTimer.start()
 
 
 func quackerMove(direction: Vector2i):
@@ -113,6 +139,7 @@ func quackerMove(direction: Vector2i):
 	var duckling_tiles = []
 	for duckling in ducklings:
 		duckling_tiles.append(world_to_tile(duckling.position))
+	print(duckling_tiles, " ", target)
 	if target in duckling_tiles:
 		return false
    
@@ -124,17 +151,26 @@ func quackerMove(direction: Vector2i):
 		
 		#	appending next crates
 		var next_coord : Vector2i = first_crate_coord + direction
-		while(typeof(crate_coord_array[next_coord.y][next_coord.x]) != TYPE_INT):
-			print("extra")
+		while(crate_coord_array[next_coord.y][next_coord.x]):
 			move_crate_array.append(crate_coord_array[next_coord.y][next_coord.x])
 			next_coord = next_coord + direction
-		print("crate array" , move_crate_array)
-		print_crate_coord_array()
+		# print_crate_coord_array()
 		
 		#	checking if last crate will push into wall
 		var last_crate : Crate = move_crate_array[-1]
 		var last_crate_coord = world_to_tile(last_crate.position)
 		var last_crate_target = last_crate_coord + direction
+		for duckling in ducklings:
+			if world_to_tile(duckling.global_position) == last_crate_target:
+				duckling.die()
+				ducklings.remove_at(ducklings.find(duckling))
+		
+		for egg in eggs:
+			if world_to_tile(egg.global_position) == last_crate_target:
+				egg.die()
+				eggs.remove_at(eggs.find(egg))
+				if len(eggs) == 0:
+					Singleton.win.emit()
 		if(last_crate_target not in walls):
 			var target_in_world = tile_to_world(target)
 			var moved = quacker.move(target_in_world)
@@ -155,13 +191,15 @@ func quackerMove(direction: Vector2i):
 		return true
 	return false
 
+func finish_level():
+	ended = true
 
 ### Utility
 func update_crate_coord_array(init_x : int, init_y : int, direction : Vector2):
-	print("initial  spot", crate_coord_array[init_y][init_x] )
-	print("initial new spot", crate_coord_array[init_y + direction.y][init_x + direction.x])
+	# print("initial  spot", crate_coord_array[init_y][init_x] )
+	# print("initial new spot", crate_coord_array[init_y + direction.y][init_x + direction.x])
 	crate_coord_array[init_y + direction.y][init_x + direction.x] = crate_coord_array[init_y][init_x] 
-	print("updated new spot", crate_coord_array[init_y + direction.y][init_x + direction.x])
+	# print("updated new spot", crate_coord_array[init_y + direction.y][init_x + direction.x])
 	crate_coord_array[init_y][init_x] = 0
 	
 func print_crate_coord_array():
@@ -180,8 +218,18 @@ func get_crate_tiles():
 		crate_tiles.append(world_to_tile(crate.position))
 	return crate_tiles
 	
+func clear_all():
+	quacker.queue_free()
+	for duckling in ducklings:
+		duckling.queue_free()
+	for egg in eggs:
+		egg.queue_free()
+	for crate in crates:
+		crate.queue_free()
+	
 func restart_level():
 	var t = get_tree()
+	clear_all()
 	if t:
 		t.reload_current_scene()
 	else:
@@ -196,3 +244,6 @@ func tile_to_world(tile_coords: Vector2):
 	var local = terrain.map_to_local(tile_coords)
 	var global = terrain.to_global(local)
 	return global
+
+func check_win_lose():
+	pass

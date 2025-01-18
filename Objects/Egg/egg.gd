@@ -13,3 +13,7 @@ func hatch():
 	if Quacker.quacker_instance:
 		Quacker.quacker_instance.addDuckling()
 	queue_free()
+
+func die():
+	queue_free()
+	Singleton.lose.emit()

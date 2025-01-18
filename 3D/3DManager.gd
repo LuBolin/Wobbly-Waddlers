@@ -12,6 +12,4 @@ func _ready():
 	%Board.position = Vector3(0, boardBox.size.y/2.0, 0)
 	# Magic constant
 	%MainCamera3D.position = %Board.position + Vector3(0, 6.5, 0.5)
-	# draw line maybe
-	# start game
-	pass
+	%LevelLabel.text = self.name

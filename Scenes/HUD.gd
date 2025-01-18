@@ -3,6 +3,8 @@ extends CanvasLayer
 
 @onready var turnDelayOverlay = $TurnOverlay
 
+var finished: bool = false
+
 func _ready():
 	self.visible = true # this was set to false in editor for easier tilemap editing
 	Singleton.win.connect(self.win)
@@ -21,16 +23,25 @@ func setDelayOverlay(visible):
 	turnDelayOverlay.visible = visible
 
 func win():
+	if finished:
+		return
+	finished = true
+	
 	turnDelayOverlay.color = Color(Color.GREEN_YELLOW, 0.3)
 	turnDelayOverlay.visible = true
 	
-	get_tree().create_timer(1.5).timeout.connect(self._on_to_main_menu_pressed)
+	if (is_inside_tree()):
+		get_tree().create_timer(1.5).timeout.connect(self._on_to_main_menu_pressed)
 
 func lose():
+	if finished:
+		return
+	finished = true
+	
 	turnDelayOverlay.color = Color(Color.RED, 0.5)
 	turnDelayOverlay.visible = true
-	
-	get_tree().create_timer(0.8).timeout.connect(func x(): Singleton.restart.emit())
+	if (is_inside_tree()):
+		get_tree().create_timer(0.8).timeout.connect(func x(): Singleton.restart.emit())
 	
 
 const mainSceneFile = "res://Scenes/MainScreen.tscn"

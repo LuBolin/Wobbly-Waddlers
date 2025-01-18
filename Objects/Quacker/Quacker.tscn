@@ -12,11 +12,11 @@ visible = false
 texture = ExtResource("2_k16xf")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(1.2, 1.8)
 sprite_frames = ExtResource("3_t3j8y")
 animation = &"swim"
 autoplay = "swim"
-frame_progress = 0.902953
+frame_progress = 0.260308
 
 [node name="quack" type="AudioStreamPlayer2D" parent="."]
 

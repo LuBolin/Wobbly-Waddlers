@@ -156,6 +156,7 @@ grow_vertical = 0
 texture = ExtResource("6_tahs1")
 
 [node name="2" type="Button" parent="ControlsGroup/LevelButtons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_v0pqm")
 theme_override_font_sizes/font_size = 24
@@ -178,6 +179,7 @@ grow_vertical = 0
 texture = ExtResource("6_tahs1")
 
 [node name="3" type="Button" parent="ControlsGroup/LevelButtons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_v0pqm")
 theme_override_font_sizes/font_size = 24
@@ -201,6 +203,7 @@ grow_vertical = 0
 texture = ExtResource("6_tahs1")
 
 [node name="4" type="Button" parent="ControlsGroup/LevelButtons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_v0pqm")
 theme_override_font_sizes/font_size = 24
@@ -223,6 +226,7 @@ grow_vertical = 0
 texture = ExtResource("6_tahs1")
 
 [node name="5" type="Button" parent="ControlsGroup/LevelButtons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_v0pqm")
 theme_override_font_sizes/font_size = 24
@@ -245,6 +249,7 @@ grow_vertical = 0
 texture = ExtResource("6_tahs1")
 
 [node name="6" type="Button" parent="ControlsGroup/LevelButtons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_v0pqm")
 theme_override_font_sizes/font_size = 24

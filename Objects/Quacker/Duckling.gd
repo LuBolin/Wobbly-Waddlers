@@ -5,6 +5,7 @@ signal started_moving(own_position)
 
 static var DucklingScene = load("res://Objects/Quacker/Duckling.tscn")
 @onready var sprite: Sprite2D = $Sprite
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 
 var parent: Node2D
 
@@ -55,18 +56,13 @@ func tweenRotation(target_position, tween_duration):
 func tweenToTarget(target_position: Vector2, duration: float):
 	var movementTween = get_tree().create_tween()
 	movementTween.tween_property(
-		sprite,
+		self,
 		"global_position",
 		target_position,
 		duration
 	)
 	movementTween.set_trans(Tween.TRANS_LINEAR)
 	movementTween.set_ease(Tween.EASE_OUT)
-	movementTween.finished.connect(
-		func():
-			self.global_position = sprite.global_position
-			sprite.position = Vector2.ZERO
-	)
 
 func die():
 	queue_free()

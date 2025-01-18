@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt6cmred8ibu4"]
+[gd_scene load_steps=4 format=3 uid="uid://bt6cmred8ibu4"]
 
 [ext_resource type="Texture2D" uid="uid://cug07wlbc8xdk" path="res://Resources/duckling.png" id="1_ryowp"]
 [ext_resource type="Script" path="res://Objects/Quacker/Duckling.gd" id="1_u5k0v"]
+[ext_resource type="SpriteFrames" uid="uid://csfj7k1py8jhl" path="res://Objects/Quacker/duckling_swim_spriteframe.tres" id="3_sc3dc"]
 
 [node name="Duckling" type="Node2D"]
 script = ExtResource("1_u5k0v")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_ryowp")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("3_sc3dc")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.153705
 
 [node name="quack" type="AudioStreamPlayer2D" parent="."]
 

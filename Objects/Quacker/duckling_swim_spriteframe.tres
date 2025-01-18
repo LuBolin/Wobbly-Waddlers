@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://csfj7k1py8jhl"]
+
+[ext_resource type="Texture2D" uid="uid://mmx3d77vkvxt" path="res://Resources/duckling_swim_anim.png" id="1_rn7wm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erkra"]
+atlas = ExtResource("1_rn7wm")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b71uy"]
+atlas = ExtResource("1_rn7wm")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1aju"]
+atlas = ExtResource("1_rn7wm")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_751ad"]
+atlas = ExtResource("1_rn7wm")
+region = Rect2(144, 0, 48, 48)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erkra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b71uy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1aju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_751ad")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]

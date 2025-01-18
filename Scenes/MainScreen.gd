@@ -20,7 +20,6 @@ func _unhandled_input(event):
 	var index = numberKeys.find(event.get_keycode(), 0)
 	if index > 0:
 		gotoLevel(index)
-		
 
 func gotoLevel(button_name):
 	var fileName = lvlFileName + str(button_name) + '.tscn'
@@ -34,6 +33,7 @@ func renderBeaten():
 		# red_tick
 		var beaten = Singleton.levelsBeaten \
 			and (index+1) in Singleton.levelsBeaten
+		print(Singleton.levelsBeaten)
 		if beaten:
 			if button.get_child_count() > 0:
 				button.get_child(0).visible = true

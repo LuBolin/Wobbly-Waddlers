@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://bt28qygtuoe15"]
+
+[ext_resource type="Script" path="res://3D/3DManager.gd" id="1_386cp"]
+[ext_resource type="PackedScene" uid="uid://d0aok26koh50p" path="res://Levels/DummyLevel.tscn" id="2_bmwqr"]
+[ext_resource type="Script" path="res://3D/boardbody.gd" id="3_kg7dr"]
+[ext_resource type="Texture2D" uid="uid://dkqw3r1vfvetf" path="res://Resources/grass.png" id="4_wffy5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8nur"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwu3i"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_760vy"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gh0cd"]
+height = 10.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjp4u"]
+height = 10.0
+
+[sub_resource type="Theme" id="Theme_l2vb6"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ddnjj"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+vertical = true
+
+[node name="3DRoot" type="Node3D"]
+script = ExtResource("1_386cp")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1152, 648)
+
+[node name="2DLevelManager" parent="SubViewport" instance=ExtResource("2_bmwqr")]
+unique_name_in_owner = true
+
+[node name="Board" type="RigidBody3D" parent="."]
+unique_name_in_owner = true
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+script = ExtResource("3_kg7dr")
+
+[node name="BoardMesh" type="MeshInstance3D" parent="Board"]
+mesh = SubResource("BoxMesh_k8nur")
+
+[node name="BoardCollider" type="CollisionShape3D" parent="Board"]
+shape = SubResource("BoxShape3D_hwu3i")
+
+[node name="Board" type="Sprite3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530551, 0)
+axis = 1
+texture = SubResource("ViewportTexture_760vy")
+
+[node name="Stand" type="StaticBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+
+[node name="StandMesh" type="MeshInstance3D" parent="Stand"]
+mesh = SubResource("CapsuleMesh_gh0cd")
+
+[node name="StandCollider" type="CollisionShape3D" parent="Stand"]
+shape = SubResource("CapsuleShape3D_xjp4u")
+
+[node name="Grass" type="Sprite3D" parent="."]
+transform = Transform3D(35.04, 0, 0, 0, 35.04, 0, 0, 0, 35.04, 0, -51.3352, 0)
+axis = 1
+texture = ExtResource("4_wffy5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02088, 4.40299)
+omni_range = 30.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoPanel" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_l2vb6")
+
+[node name="SubViewport2" type="SubViewport" parent="HBoxContainer/InfoPanel"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D2" type="Camera3D" parent="HBoxContainer/InfoPanel/SubViewport2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.61243)
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ddnjj")
+
+[node name="MainView" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/MainView"]
+handle_input_locally = false
+size = Vector2i(948, 648)
+render_target_update_mode = 4
+
+[node name="MainCamera3D" type="Camera3D" parent="HBoxContainer/MainView/SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, 5.5, 0.5)

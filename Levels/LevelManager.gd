@@ -180,7 +180,8 @@ func quackerMove(direction: Vector2i):
 				var crate_target_in_world = tile_to_world(crate_coord + direction)
 				var crate_moved = crate.move(crate_target_in_world)
 				update_crate_coord_array(crate_coord.x - level_offset.x, crate_coord.y - level_offset.y, direction)
-		return true
+			return true
+		return false
 	else:
 		for egg in eggs:
 			if target == world_to_tile(egg.position):
@@ -193,6 +194,23 @@ func quackerMove(direction: Vector2i):
 
 func finish_level():
 	ended = true
+
+func get_torque(pivot_x: float):
+	var torque_at_1 = 0
+	var entities = [quacker] + ducklings + eggs + crates
+	for entity: Node2D in entities:
+		torque_at_1 += (entity.global_position.x - pivot_x)
+	return torque_at_1
+
+func draw_dash(x: float):
+	var y = get_viewport().get_visible_rect().size.y
+	var topPoint: Vector2 = Vector2(x, -y)
+	var btmPoint: Vector2 = Vector2(x, y)
+	var points: PackedVector2Array = PackedVector2Array([topPoint, btmPoint])
+	var colors: PackedColorArray = PackedColorArray([Color.RED, Color.DARK_BLUE])
+	draw_multiline_colors(points, colors)
+
+
 
 ### Utility
 func update_crate_coord_array(init_x : int, init_y : int, direction : Vector2):
@@ -244,6 +262,3 @@ func tile_to_world(tile_coords: Vector2):
 	var local = terrain.map_to_local(tile_coords)
 	var global = terrain.to_global(local)
 	return global
-
-func check_win_lose():
-	pass

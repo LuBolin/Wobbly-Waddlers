@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bt28qygtuoe15"]
+
+[ext_resource type="PackedScene" uid="uid://dmkxfrvlun3jo" path="res://sample2d.tscn" id="1_1hkhw"]
+[ext_resource type="Script" path="res://pond.gd" id="1_3d2sk"]
+[ext_resource type="Script" path="res://boardbody.gd" id="2_x2dn2"]
+[ext_resource type="Texture2D" uid="uid://dkqw3r1vfvetf" path="res://grass.png" id="3_06cyv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8nur"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwu3i"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_760vy"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gh0cd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjp4u"]
+
+[node name="Pond" type="Node3D"]
+script = ExtResource("1_3d2sk")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(853, 512)
+
+[node name="Sample2d" parent="SubViewport" instance=ExtResource("1_1hkhw")]
+
+[node name="BoardBody" type="RigidBody3D" parent="."]
+script = ExtResource("2_x2dn2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoardBody"]
+mesh = SubResource("BoxMesh_k8nur")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardBody"]
+shape = SubResource("BoxShape3D_hwu3i")
+
+[node name="Board" type="Sprite3D" parent="BoardBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530551, 0)
+axis = 1
+texture = SubResource("ViewportTexture_760vy")
+
+[node name="Stand" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.561, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stand"]
+mesh = SubResource("CapsuleMesh_gh0cd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stand"]
+shape = SubResource("CapsuleShape3D_xjp4u")
+
+[node name="Grass" type="Sprite3D" parent="."]
+transform = Transform3D(35.04, 0, 0, 0, 35.04, 0, 0, 0, 35.04, 0, -51.3352, 0)
+axis = 1
+texture = ExtResource("3_06cyv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02088, 4.40299)
+omni_range = 30.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport2" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D2" type="Camera3D" parent="HBoxContainer/SubViewportContainer/SubViewport2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.61243)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(952, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, 5.76, 0)

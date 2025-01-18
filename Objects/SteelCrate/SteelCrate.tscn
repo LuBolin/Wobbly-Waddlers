@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cylx06yju25c6"]
+
+[ext_resource type="Script" path="res://Objects/SteelCrate/steel_crate.gd" id="1_jv0gh"]
+[ext_resource type="Texture2D" uid="uid://gi2efj4ncnw4" path="res://Resources/SteelCrate.png" id="2_0ael1"]
+
+[node name="SteelCrate" type="Node2D"]
+script = ExtResource("1_jv0gh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0ael1")

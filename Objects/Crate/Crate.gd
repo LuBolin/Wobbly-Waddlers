@@ -5,9 +5,6 @@ static var CrateScene = load("res://Objects/Crate/Crate.tscn")
 
 @onready var sprite: Sprite2D = $Sprite2D
 
-var movementTween
-var tween_duration = 0.1
-
 static func summonCrate():
 	var crate = CrateScene.instantiate()
 	return crate

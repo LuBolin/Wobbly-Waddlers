@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cl4jo0ip1xd53"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://cl4jo0ip1xd53"]
 
 [ext_resource type="Texture2D" uid="uid://ddnjvhqcjtnaa" path="res://Resources/crate.png" id="1_cmier"]
 [ext_resource type="Texture2D" uid="uid://lkbdg66a55f0" path="res://Resources/quacker.png" id="1_haap4"]
 [ext_resource type="Texture2D" uid="uid://dfva1ntdqbtr5" path="res://Resources/tilemap.png" id="1_kskhl"]
 [ext_resource type="Texture2D" uid="uid://cug07wlbc8xdk" path="res://Resources/duckling.png" id="3_klb7l"]
 [ext_resource type="Texture2D" uid="uid://dgigmmxif1i5g" path="res://Resources/egg.png" id="4_peptq"]
+[ext_resource type="Texture2D" uid="uid://gi2efj4ncnw4" path="res://Resources/SteelCrate.png" id="6_ntbv7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8rd76"]
 texture = ExtResource("1_kskhl")
@@ -361,6 +362,11 @@ texture = ExtResource("3_klb7l")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uasgm"]
+texture = ExtResource("6_ntbv7")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(48, 48)
 terrain_set_0/mode = 0
@@ -371,3 +377,4 @@ sources/2 = SubResource("TileSetAtlasSource_uurhc")
 sources/3 = SubResource("TileSetAtlasSource_cp1bi")
 sources/4 = SubResource("TileSetAtlasSource_0nruf")
 sources/0 = SubResource("TileSetAtlasSource_8rd76")
+sources/5 = SubResource("TileSetAtlasSource_uasgm")

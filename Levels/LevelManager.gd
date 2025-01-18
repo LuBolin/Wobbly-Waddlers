@@ -8,6 +8,7 @@ extends Node2D
 var walls: Array[Vector2i]
 var quacker: Quacker
 var crates: Array[Crate]
+var steelCrates: Array[SteelCrate]
 var crate_coord_array: Array[Array]
 var eggs: Array[Egg]
 var ducklings: Array[Duckling]
@@ -76,6 +77,15 @@ func parse_tilemaplayer():
 		eggs.append(egg)
 		terrain.set_cell(egg_coords, -1)
 	
+	walls.append_array(terrain.get_used_cells_by_id(5))
+	for steel_coord in terrain.get_used_cells_by_id(5):
+		var steel_world_pos = tile_to_world(steel_coord)
+		var steel = SteelCrate.summonSteelCrate()
+		steel.global_position = steel_world_pos
+		add_child.call_deferred(steel)
+		steelCrates.append(steel)
+		terrain.set_cell(steel_coord, -1)
+		
 	await get_tree().process_frame.connect(
 		func():
 			for duckling_coords in terrain.get_used_cells_by_id(4):
@@ -205,9 +215,12 @@ func quackerMove(direction: Vector2i):
 
 func get_torque():
 	var torque_at_1 = 0
-	var entities = [quacker] + ducklings + eggs + crates
+	var entities = [quacker] + ducklings + eggs + crates + steelCrates
 	for entity: Node2D in entities:
-		torque_at_1 += (entity.global_position.x - stand_x_val)
+		var t = (entity.global_position.x - stand_x_val)
+		if entity is SteelCrate:
+			t *= 2
+		torque_at_1 += t
 	return torque_at_1
 
 func set_stand_x(x: float):

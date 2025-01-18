@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://db8nht0hqcvwp"]
+
+[ext_resource type="Texture2D" uid="uid://dgigmmxif1i5g" path="res://Resources/egg.png" id="1_bxld8"]
+[ext_resource type="Script" path="res://Objects/Egg/egg.gd" id="1_rymst"]
+
+[node name="Egg" type="Node2D"]
+script = ExtResource("1_rymst")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_bxld8")

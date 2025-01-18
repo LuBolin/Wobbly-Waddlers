@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://8au4nx66kqvs"]
+
+[ext_resource type="Script" path="res://Objects/Quacker/Quacker.gd" id="1_2pq7q"]
+[ext_resource type="Texture2D" uid="uid://lkbdg66a55f0" path="res://Resources/quacker.png" id="2_k16xf"]
+
+[node name="Quacker" type="Node2D"]
+script = ExtResource("1_2pq7q")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_k16xf")

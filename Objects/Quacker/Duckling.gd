@@ -1,37 +1,24 @@
-class_name Quacker
+class_name Duckling
 extends Node2D
 
-signal started_moving(own_position, anim_duration)
+signal started_moving(own_position)
 
-static var QuackerScene = load("res://Objects/Quacker/Quacker.tscn")
 static var DucklingScene = load("res://Objects/Quacker/Duckling.tscn")
 
-static var quacker_instance: Quacker = null
+var parent: Node2D
+var child: Node2D
 
-@onready var sprite: Sprite2D = $Sprite
+var movementTween
 
-var children_count
-
-var tail: Node2D
-
-static func summonQuacker():
-	var quacker = QuackerScene.instantiate()
-	if not quacker_instance:
-		quacker_instance = quacker
-	quacker.tail = quacker
-	return quacker
-
-func addDuckling():
-	var duckling = Duckling.summonDuckling(tail)
-	duckling.global_position = tail.global_position
-	tail = duckling
-	var parent = get_parent()
-	get_parent().add_child.call_deferred(duckling)
-	assert(get_parent() is LevelManager)
-	if get_parent() is LevelManager:
-		get_parent().ducklings.append(duckling)
+static func summonDuckling(parent: Node2D):
+	var duckling = DucklingScene.instantiate()
+	duckling.parent = parent
+	parent.started_moving.connect(duckling.move)
+	return duckling
 
 func move(target: Vector2, anim_duration: float):
+	if (not is_inside_tree()):
+		return
 	var need_to_rotate = tweenRotation(target, anim_duration/2.0)
 	var translation_tween_duration = anim_duration
 	var wait_time = 0

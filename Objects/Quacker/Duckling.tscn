@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt6cmred8ibu4"]
+
+[ext_resource type="Texture2D" uid="uid://cug07wlbc8xdk" path="res://Resources/duckling.png" id="1_ryowp"]
+[ext_resource type="Script" path="res://Objects/Quacker/Duckling.gd" id="1_u5k0v"]
+
+[node name="Duckling" type="Node2D"]
+script = ExtResource("1_u5k0v")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ryowp")

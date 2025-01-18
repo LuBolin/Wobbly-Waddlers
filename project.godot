@@ -20,6 +20,11 @@ config/icon="res://Resources/icon.svg"
 Singleton="*res://Singleton.gd"
 Global="*res://Global.gd"
 
+[display]
+
+window/size/viewport_width=1122
+window/stretch/mode="viewport"
+
 [input]
 
 up={
@@ -57,3 +62,4 @@ restart={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.388235, 0.815686, 0.945098, 1)

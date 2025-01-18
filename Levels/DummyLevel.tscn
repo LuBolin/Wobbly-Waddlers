@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=4 uid="uid://d0aok26koh50p"]
+[gd_scene load_steps=7 format=4 uid="uid://d0aok26koh50p"]
 
 [ext_resource type="Script" path="res://Levels/LevelManager.gd" id="1_ykndm"]
 [ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="2_x0qaq"]
 [ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="3_n0pcc"]
+[ext_resource type="Texture2D" uid="uid://ojue2qysf3pu" path="res://Resources/red_dash.png" id="4_4rta2"]
+[ext_resource type="Shader" path="res://Scenes/ShifitingTexture.gdshader" id="4_sivo7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfbm2"]
+shader = ExtResource("4_sivo7")
+shader_parameter/speed = 1.0
 
 [node name="DummyLevel" type="Node2D"]
 script = ExtResource("1_ykndm")
@@ -17,3 +23,12 @@ tile_set = ExtResource("2_x0qaq")
 wait_time = 0.3
 
 [node name="Hud" parent="." instance=ExtResource("3_n0pcc")]
+
+[node name="StandIndicatorLine" type="Line2D" parent="."]
+top_level = true
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_tfbm2")
+points = PackedVector2Array(0, -324, 0, 324)
+texture = ExtResource("4_4rta2")
+texture_mode = 1

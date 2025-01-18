@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://8d4i1e3n6vti"]
+
+[ext_resource type="Texture2D" uid="uid://ceq5cooatubhb" path="res://Resources/quacker_swim_anim.png" id="1_vyhwy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhhrf"]
+atlas = ExtResource("1_vyhwy")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcopu"]
+atlas = ExtResource("1_vyhwy")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s2g8"]
+atlas = ExtResource("1_vyhwy")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8gjb"]
+atlas = ExtResource("1_vyhwy")
+region = Rect2(768, 0, 256, 256)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhhrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcopu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s2g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8gjb")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]

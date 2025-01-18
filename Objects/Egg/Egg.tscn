@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://db8nht0hqcvwp"]
+[gd_scene load_steps=4 format=3 uid="uid://db8nht0hqcvwp"]
 
 [ext_resource type="Texture2D" uid="uid://dgigmmxif1i5g" path="res://Resources/egg.png" id="1_bxld8"]
 [ext_resource type="Script" path="res://Objects/Egg/egg.gd" id="1_rymst"]
+[ext_resource type="SpriteFrames" uid="uid://df5xh63yuor6p" path="res://Objects/Egg/egg_wobble_spriteframes.tres" id="3_p35tv"]
 
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_rymst")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_bxld8")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = ExtResource("3_p35tv")
+animation = &"wobble"
+autoplay = "wobble"
+frame_progress = 0.724428

@@ -9,6 +9,7 @@ static var DucklingScene = load("res://Objects/Quacker/Duckling.tscn")
 static var quacker_instance: Quacker = null
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 
 var alive: bool = true
 
@@ -87,5 +88,6 @@ func die():
 	if not self.alive:
 		return
 	self.alive = false
+	animated_sprite.stop()
 	Singleton.lose.emit()
 	sprite.modulate = Color.DARK_RED

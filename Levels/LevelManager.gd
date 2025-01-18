@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var inputDelayTimer: Timer = $InputDelayTimer # wait time of 1s
 @onready var terrain: TileMapLayer = $Terrain
+@onready var stand_indicator_line: Line2D = $StandIndicatorLine
 
 var walls: Array[Vector2i]
 var quacker: Quacker
@@ -19,6 +20,7 @@ const MAX_INPUT_BUFFER_SIZE: int = 2
 var input_buffer: Array[InputEventKey]
 var lingering_input: InputEventKey
 
+var stand_x_val: float
 var ended: bool = false
 
 func _ready():
@@ -139,7 +141,6 @@ func quackerMove(direction: Vector2i):
 	var duckling_tiles = []
 	for duckling in ducklings:
 		duckling_tiles.append(world_to_tile(duckling.position))
-	print(duckling_tiles, " ", target)
 	if target in duckling_tiles:
 		return false
    
@@ -195,21 +196,21 @@ func quackerMove(direction: Vector2i):
 func finish_level():
 	ended = true
 
-func get_torque(pivot_x: float):
+func get_torque():
 	var torque_at_1 = 0
 	var entities = [quacker] + ducklings + eggs + crates
 	for entity: Node2D in entities:
-		torque_at_1 += (entity.global_position.x - pivot_x)
+		torque_at_1 += (entity.global_position.x - stand_x_val)
 	return torque_at_1
 
-func draw_dash(x: float):
-	var y = get_viewport().get_visible_rect().size.y
-	var topPoint: Vector2 = Vector2(x, -y)
-	var btmPoint: Vector2 = Vector2(x, y)
-	var points: PackedVector2Array = PackedVector2Array([topPoint, btmPoint])
-	var colors: PackedColorArray = PackedColorArray([Color.RED, Color.DARK_BLUE])
-	draw_multiline_colors(points, colors)
-
+func set_stand_x(x: float):
+	stand_indicator_line.clear_points()
+	stand_x_val = x
+	var height = 324 # un-hardcode later
+	var topPoint = Vector2(x, -height)
+	var btmPoint = Vector2(x, height)
+	stand_indicator_line.add_point(topPoint)
+	stand_indicator_line.add_point(btmPoint)
 
 
 ### Utility

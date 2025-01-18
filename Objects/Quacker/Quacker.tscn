@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://8au4nx66kqvs"]
+[gd_scene load_steps=4 format=3 uid="uid://8au4nx66kqvs"]
 
 [ext_resource type="Script" path="res://Objects/Quacker/Quacker.gd" id="1_2pq7q"]
 [ext_resource type="Texture2D" uid="uid://lkbdg66a55f0" path="res://Resources/quacker.png" id="2_k16xf"]
+[ext_resource type="SpriteFrames" uid="uid://8d4i1e3n6vti" path="res://Objects/Quacker/quacker_swim_spriteframes.tres" id="3_t3j8y"]
 
 [node name="Quacker" type="Node2D"]
 script = ExtResource("1_2pq7q")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_k16xf")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = ExtResource("3_t3j8y")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.0278653

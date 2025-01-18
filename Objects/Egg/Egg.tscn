@@ -16,4 +16,6 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("3_p35tv")
 animation = &"wobble"
 autoplay = "wobble"
-frame_progress = 0.724428
+frame_progress = 0.694542
+
+[node name="hatch" type="AudioStreamPlayer2D" parent="."]

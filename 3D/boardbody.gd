@@ -1,8 +1,9 @@
 extends RigidBody3D
 
 func _ready() -> void:
+	# arbitrary constant
 	set_inertia(Vector3(2, 2, 2))
-	set_angular_damp(1)
+	set_angular_damp(3)
 	%"2DLevelManager".set_stand_x(%Stand.position.x)
 
 func _physics_process(delta: float) -> void:

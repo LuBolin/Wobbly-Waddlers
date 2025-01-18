@@ -8,3 +8,9 @@ script = ExtResource("1_u5k0v")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_ryowp")
+
+[node name="quack" type="AudioStreamPlayer2D" parent="."]
+
+[node name="die" type="AudioStreamPlayer2D" parent="."]
+
+[node name="splash" type="AudioStreamPlayer2D" parent="."]

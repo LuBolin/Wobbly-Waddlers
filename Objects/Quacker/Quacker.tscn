@@ -16,4 +16,10 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("3_t3j8y")
 animation = &"swim"
 autoplay = "swim"
-frame_progress = 0.0278653
+frame_progress = 0.902953
+
+[node name="quack" type="AudioStreamPlayer2D" parent="."]
+
+[node name="death" type="AudioStreamPlayer2D" parent="."]
+
+[node name="splash" type="AudioStreamPlayer2D" parent="."]

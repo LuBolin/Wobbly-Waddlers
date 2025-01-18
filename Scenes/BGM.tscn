@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://tcg56sn7hjru"]
+
+[node name="Bgm" type="Node3D"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

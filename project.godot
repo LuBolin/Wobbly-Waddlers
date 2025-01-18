@@ -19,6 +19,7 @@ config/icon="res://Resources/icon.svg"
 
 Singleton="*res://Singleton.gd"
 Global="*res://Global.gd"
+Bgm="*res://Scenes/BGM.tscn"
 
 [display]
 
@@ -62,4 +63,3 @@ restart={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.388235, 0.815686, 0.945098, 1)

@@ -35,6 +35,7 @@ func _ready():
 	parse_tilemaplayer()
 	
 	Singleton.lose.connect(finish_level)
+	Singleton.win.connect(finish_level)
 
 func parse_tilemaplayer():
 	for i in range(level_size.y):
@@ -170,8 +171,6 @@ func quackerMove(direction: Vector2i):
 			if world_to_tile(egg.global_position) == last_crate_target:
 				egg.die()
 				eggs.remove_at(eggs.find(egg))
-				if len(eggs) == 0:
-					Singleton.win.emit()
 		if(last_crate_target not in walls):
 			var target_in_world = tile_to_world(target)
 			var moved = quacker.move(target_in_world)
@@ -188,6 +187,8 @@ func quackerMove(direction: Vector2i):
 			if target == world_to_tile(egg.position):
 				egg.hatch()
 				eggs.remove_at(eggs.find(egg))
+				if len(eggs) == 0:
+					Singleton.win.emit()
 		var target_in_world = tile_to_world(target)
 		quacker.move(target_in_world)
 		return true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b71xsn352f2ms"
-path="res://.godot/imported/quacker.svg-514f93c96659cec03147afdf8d362f18.ctex"
+uid="uid://dvu8uik6fehp5"
+path="res://.godot/imported/wall.png-5fd3e28897256be5a67ec1f6c35e5f75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/quacker.svg"
-dest_files=["res://.godot/imported/quacker.svg-514f93c96659cec03147afdf8d362f18.ctex"]
+source_file="res://Resources/wall.png"
+dest_files=["res://.godot/imported/wall.png-5fd3e28897256be5a67ec1f6c35e5f75.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

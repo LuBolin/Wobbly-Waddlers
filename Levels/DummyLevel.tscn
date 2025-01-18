@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=4 uid="uid://d0aok26koh50p"]
+
+[ext_resource type="Script" path="res://Levels/LevelManager.gd" id="1_ykndm"]
+[ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="2_x0qaq"]
+
+[node name="DummyLevel" type="Node2D"]
+script = ExtResource("1_ykndm")
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD7//z/AAAAAAAAAAD8//z/AAAAAAAAAAD9//z/AAAAAAAAAAD+//z/AAAAAAAAAAD///z/AAAAAAAAAAAAAPz/AAAAAAAAAAABAPz/AAAAAAAAAAACAPz/AAAAAAAAAAADAPz/AAAAAAAAAAADAP3/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAD7/wIAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wAAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wQAAAAAAAAAAAD+/wQAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD5/wAAAAAAAAAAAAD4/wAAAAAAAAAAAAD4////AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD+/wAAAAAAAAAAAAD5//3/AQAAAAAAAAA=")
+tile_set = ExtResource("2_x0qaq")
+
+[node name="Camera2D" type="Camera2D" parent="."]

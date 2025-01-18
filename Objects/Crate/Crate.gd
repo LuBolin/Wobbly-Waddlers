@@ -13,11 +13,10 @@ static func summonCrate():
 	return crate
 	
 func move(target: Vector2):
-	tweenToTarget(target, tween_duration)
-	return true
+	tweenToTarget(target, Global.TICK_DURATION)
 
 func tweenToTarget(target_position: Vector2, duration: float):
-	movementTween = get_tree().create_tween()
+	var movementTween = get_tree().create_tween()
 	movementTween.tween_property(
 		self,
 		"global_position",
@@ -25,13 +24,4 @@ func tweenToTarget(target_position: Vector2, duration: float):
 		duration
 	)
 	movementTween.set_trans(Tween.TRANS_LINEAR)
-	movementTween.set_ease(Tween.EASE_OUT)	
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	movementTween.set_ease(Tween.EASE_OUT)

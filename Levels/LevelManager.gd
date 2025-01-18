@@ -1,7 +1,7 @@
 class_name LevelManager
 extends Node2D
 
-@onready var inputDelayTimer = $InputDelayTimer # wait time of 1s
+@onready var inputDelayTimer: Timer = $InputDelayTimer # wait time of 1s
 @onready var terrain: TileMapLayer = $Terrain
 
 var walls: Array[Vector2i]
@@ -36,18 +36,20 @@ func _ready():
 	terrain.set_cell(quacker_tile_coord, -1)  # Set to -1 to remove the tile
 	var quacker_world_pos = tile_to_world(quacker_tile_coord)
 	quacker = Quacker.summonQuacker()
-
-  for crate_coords in terrain.get_used_cells_by_id(2):
-      #	Regular spawning into world and removing from tilemap
-      var crate_world_pos = tile_to_world(crate_coords)
-      var crate = Crate.summonCrate()
-      crate.global_position = crate_world_pos
-      get_parent().add_child.call_deferred(crate)
-      crates.append(crate)
-      #	Stores crates int crate_coord_array. minus terrain rect since crate coord's anchor is center
-      crate_coord_array[crate_coords.y - level_offset.y][crate_coords.x - level_offset.x] = crate
-      terrain.set_cell(crate_coords, -1)
+	quacker.global_position = quacker_world_pos
+	add_child(quacker)
 	
+	for crate_coords in terrain.get_used_cells_by_id(2):
+	#	Regular spawning into world and removing from tilemap
+		var crate_world_pos = tile_to_world(crate_coords)
+		var crate = Crate.summonCrate()
+		crate.global_position = crate_world_pos
+		add_child.call_deferred(crate)
+		crates.append(crate)
+		#	Stores crates int crate_coord_array. minus terrain rect since crate coord's anchor is center
+		crate_coord_array[crate_coords.y - level_offset.y][crate_coords.x - level_offset.x] = crate
+		terrain.set_cell(crate_coords, -1)
+
 	for egg_coords in terrain.get_used_cells_by_id(3):
 		var egg_world_pos = tile_to_world(egg_coords)
 		var egg = Egg.summonEgg()
@@ -63,6 +65,7 @@ func _ready():
 				terrain.set_cell(duckling_coords, -1)
 	)
 	
+	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
 	inputDelayTimer.timeout.connect(handle_input)
 
 func _input(event):
@@ -141,18 +144,16 @@ func quackerMove(direction: Vector2i):
 				var crate_target_in_world = tile_to_world(crate_coord + direction)
 				var crate_moved = crate.move(crate_target_in_world)
 				update_crate_coord_array(crate_coord.x - level_offset.x, crate_coord.y - level_offset.y, direction)
-				print_crate_coord_array()
-      return true
+		return true
 	else:
-    for egg in eggs:
-      if target == world_to_tile(egg.position):
-        egg.hatch()
-        eggs.remove_at(eggs.find(egg))
-
-    var target_in_world = tile_to_world(target)
-    quacker.move(target_in_world, inputDelayTimer.wait_time)
-	  return true
-   return false
+		for egg in eggs:
+			if target == world_to_tile(egg.position):
+				egg.hatch()
+				eggs.remove_at(eggs.find(egg))
+		var target_in_world = tile_to_world(target)
+		quacker.move(target_in_world)
+		return true
+	return false
 
 
 ### Utility
@@ -195,5 +196,3 @@ func tile_to_world(tile_coords: Vector2):
 	var local = terrain.map_to_local(tile_coords)
 	var global = terrain.to_global(local)
 	return global
-	
-				

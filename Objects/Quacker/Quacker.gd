@@ -31,9 +31,9 @@ func addDuckling():
 	if get_parent() is LevelManager:
 		get_parent().ducklings.append(duckling)
 
-func move(target: Vector2, anim_duration: float):
-	var need_to_rotate = tweenRotation(target, anim_duration/2.0)
-	var translation_tween_duration = anim_duration
+func move(target: Vector2):
+	var need_to_rotate = tweenRotation(target, Global.TICK_DURATION/2.0)
+	var translation_tween_duration = Global.TICK_DURATION
 	var wait_time = 0
 	if need_to_rotate:
 		translation_tween_duration /= 2.0
@@ -41,7 +41,7 @@ func move(target: Vector2, anim_duration: float):
 	get_tree().create_timer(wait_time).timeout.connect(
 		func(): tweenToTarget(target, translation_tween_duration)
 	)
-	started_moving.emit(self.position, anim_duration)
+	started_moving.emit(self.position)
 	return true
 
 func tweenRotation(target_position, tween_duration):

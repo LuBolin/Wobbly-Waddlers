@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="HackAndRoll2025"
-run/main_scene="res://Levels/DummyLevelBox.tscn"
+run/main_scene="res://Levels/DummyLevel.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Singleton="*res://Singleton.gd"
+Global="*res://Global.gd"
 
 [input]
 

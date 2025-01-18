@@ -17,8 +17,4 @@ func _input(key: InputEvent):
 
 func tilt_board_based_on_masses(delta: float) -> void:
 	var tilt_amount = $"../SubViewport/Sample2d".poll_position()
-	#if tilt_amount > 0:
-		#apply_force(FORCE_VECTOR, Vector3(-delta * FORCE_MULTIPLIER * tilt_amount, 0, 0))
-	#elif tilt_amount < 0:
-		#apply_force(FORCE_VECTOR, Vector3(delta * FORCE_MULTIPLIER, 0, 0))
 	apply_force(FORCE_VECTOR, Vector3(-delta * FORCE_MULTIPLIER * tilt_amount, 0, 0))

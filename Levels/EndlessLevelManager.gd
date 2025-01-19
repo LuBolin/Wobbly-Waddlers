@@ -8,10 +8,11 @@ func _ready():
 	Singleton.restart.connect(self.restart_level)
 	
 	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
-	inputDelayTimer.timeout.connect(handle_input)
-	
 	# Endless
 	inputDelayTimer.timeout.connect(endless_drop_random_tiles)
+	
+	inputDelayTimer.timeout.connect(handle_input)
+	
 	
 	parse_tilemaplayer()
 	
@@ -252,17 +253,46 @@ func tile_to_world(tile_coords: Vector2):
 var ticks_since_last_tile = 0
 const TICKS_UNTIL_NEXT_TILE = 3
 func endless_drop_random_tiles():
+	# quacker offmap
+	var tile_coords = world_to_tile(quacker.position) - level_offset
+	if tile_coords.x < 2 or tile_coords.x > level_size.x - 3 or tile_coords.y < 2 or tile_coords.y > level_size.y - 3:
+		quacker.die()
+	
 	# remove edge crates
 	for i in range(level_size.y):
 		if crate_coord_array[i][1] is Crate:
+			var c = crate_coord_array[i][1]
 			crate_coord_array[i][1] = 0
+			for j in range(crates.size()):
+				if crates[j] == c:
+					crates.remove_at(j)
+					break
+			c.queue_free()
 		if crate_coord_array[i][level_size.x - 2] is Crate:
+			var c = crate_coord_array[i][level_size.x - 2]
 			crate_coord_array[i][level_size.x - 2] = 0
+			for j in range(crates.size()):
+				if crates[j] == c:
+					crates.remove_at(j)
+					break
+			c.queue_free()
 	for i in range(level_size.y):
 		if crate_coord_array[1][i] is Crate:
+			var c = crate_coord_array[1][i]
 			crate_coord_array[1][i] = 0
+			for j in range(crates.size()):
+				if crates[j] == c:
+					crates.remove_at(j)
+					break
+			c.queue_free()
 		if crate_coord_array[level_size.y - 2][i] is Crate:
+			var c = crate_coord_array[level_size.y - 2][i]
 			crate_coord_array[level_size.y - 2][i] = 0
+			for j in range(crates.size()):
+				if crates[j] == c:
+					crates.remove_at(j)
+					break
+			c.queue_free()
 	
 	
 	ticks_since_last_tile += 1
@@ -293,8 +323,8 @@ func endless_choose_random_item():
 
 func endless_choose_random_coords():
 	var choice_array = []
-	for i in range(level_size.y):
-		for j in range(level_size.x):
+	for i in range(2, level_size.y - 2):
+		for j in range(2, level_size.x - 2):
 			if crate_coord_array[i][j] is Crate:
 				continue
 			choice_array.append([i, j])

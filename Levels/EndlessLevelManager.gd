@@ -15,7 +15,6 @@ func _ready():
 	parse_tilemaplayer()
 	
 	Singleton.lose.connect(lose_handler)
-	Singleton.win.connect(win_handler)
 
 var parity = 1
 func alternate_cycle_update():

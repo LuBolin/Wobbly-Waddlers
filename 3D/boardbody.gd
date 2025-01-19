@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 	tilt_board_based_on_masses(delta)
 
 func on_body_exited(body: Node3D):
+	print("BOdy exited!!")
 	if body == %Stand and abs(self.rotation.z) > PI/4.0:
 		Singleton.lose.emit()
 

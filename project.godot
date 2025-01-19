@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="HackAndRoll2025"
-run/main_scene="res://Scenes/MainScreen.tscn"
+run/main_scene="res://Scenes/MainSMenu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://Resources/icon.svg"
+config/icon="res://Resources/Quacker_icon.png"
 
 [autoload]
 

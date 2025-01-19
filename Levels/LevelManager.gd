@@ -148,19 +148,22 @@ func quackerMove(direction: Vector2i):
 	var anyMoved = false;
 	var tile_coords = world_to_tile(quacker.position)
 	
+	var duckling_tiles = []
+	for duckling in ducklings:
+		duckling_tiles.append(world_to_tile(duckling.position))
+	
 	var delta_deg = rad_to_deg(abs(Vector2(direction).angle() - quacker.rotation))
 	delta_deg = snapped(delta_deg, 90)
 	if is_equal_approx(delta_deg, 180):
-		direction = -direction
+		for duck_tile in duckling_tiles:
+			if duck_tile == tile_coords + direction:
+				direction = -direction
 	
 	var target = tile_coords + direction
 			
 	if target in walls:
 		return false
 	
-	var duckling_tiles = []
-	for duckling in ducklings:
-		duckling_tiles.append(world_to_tile(duckling.position))
 	if target in duckling_tiles:
 		return false
    
@@ -220,6 +223,8 @@ func get_torque():
 		var t = (entity.global_position.x - stand_x_val)
 		if entity is SteelCrate:
 			t *= 2
+		elif entity is Quacker:
+			t *= 2.5
 		torque_at_1 += t
 	return torque_at_1
 
@@ -234,6 +239,7 @@ func set_stand_x(x: float):
 
 func win_handler():
 	ended = true
+	print("Won on : ", thisLevelNumber)
 	if thisLevelNumber not in Singleton.levelsBeaten:
 		Singleton.levelsBeaten.append(thisLevelNumber)
 		Singleton.save_data()

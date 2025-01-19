@@ -48,7 +48,7 @@ func lose():
 		get_tree().create_timer(0.8).timeout.connect(func x(): Singleton.restart.emit())
 	
 
-const mainSceneFile = "res://Scenes/MainScreen.tscn"
+const mainSceneFile = "res://Scenes/MainSMenu.tscn"
 func _on_to_main_menu_pressed():
 	Singleton.to_menu.emit()
 	get_tree().change_scene_to_file(mainSceneFile)

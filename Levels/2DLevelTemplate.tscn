@@ -34,6 +34,7 @@ tile_map_data = PackedByteArray("AAD0/wYAAAAGAAEAAAD0/wUAAAACAAEAAAD1/wYAAAABAAA
 tile_set = ExtResource("2_x0qaq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.9, 0.85)
 
 [node name="InputDelayTimer" type="Timer" parent="."]
 wait_time = 0.3

@@ -7,17 +7,22 @@ func _ready():
 	
 	Singleton.restart.connect(self.restart_level)
 	
-	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
-	# Endless
-	inputDelayTimer.timeout.connect(endless_drop_random_tiles)
+	inputDelayTimer.set_wait_time(Global.TICK_DURATION / 2)
 	
-	inputDelayTimer.timeout.connect(handle_input)
+	inputDelayTimer.timeout.connect(alternate_cycle_update)
 	
 	
 	parse_tilemaplayer()
 	
 	Singleton.lose.connect(finish_level)
 
+var parity = 1
+func alternate_cycle_update():
+	if parity > 0:
+		endless_drop_random_tiles()
+	else:
+		handle_input()
+	parity *= -1
 
 
 func parse_tilemaplayer():
@@ -327,6 +332,12 @@ func endless_choose_random_coords():
 		for j in range(2, level_size.x - 2):
 			if crate_coord_array[i][j] is Crate:
 				continue
+			for egg in eggs:
+				if tile_to_world(Vector2(j, i)) == egg.global_position:
+					continue
+			for duck in ducklings:
+				if tile_to_world(Vector2(j, i)) == duck.global_position:
+					continue
 			choice_array.append([i, j])
 	var chosen = choice_array.pick_random()
 	return Vector2(chosen[1] + level_offset.x, chosen[0] + level_offset.y)

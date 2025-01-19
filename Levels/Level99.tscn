@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dubd7edqtekn2"]
+
+[ext_resource type="PackedScene" uid="uid://bt28qygtuoe15" path="res://3D/3DLevelTemplate.tscn" id="1_h4nux"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g4hb6"]
+viewport_path = NodePath("2DSubViewport")
+
+[sub_resource type="Theme" id="Theme_pcj3g"]
+
+[node name="Level 99" instance=ExtResource("1_h4nux")]
+
+[node name="Board" parent="Board" index="2"]
+texture = SubResource("ViewportTexture_g4hb6")
+
+[node name="InfoPanel" parent="Control/HBoxContainer" index="0"]
+theme = SubResource("Theme_pcj3g")

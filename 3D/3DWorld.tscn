@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dfte568r5jhra"]
 
 [ext_resource type="Script" path="res://3D/3DManager.gd" id="1_386cp"]
-[ext_resource type="PhysicsMaterial" path="res://3D/board_strong_friction_physics_material.tres" id="3_4kneq"]
+[ext_resource type="PhysicsMaterial" uid="uid://byewnhgc3p68i" path="res://3D/board_strong_friction_physics_material.tres" id="3_4kneq"]
 [ext_resource type="Script" path="res://3D/boardbody.gd" id="3_kg7dr"]
 [ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="4_8i3vt"]
 [ext_resource type="Texture2D" uid="uid://dtk3srt7sb8f8" path="res://Resources/white.png" id="4_skp1u"]

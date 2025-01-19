@@ -281,6 +281,8 @@ func clear_all():
 		egg.queue_free()
 	for crate in crates:
 		crate.queue_free()
+	for steel in steelCrates:
+		steel.queue_free()
 	
 func restart_level():
 	var t = get_tree()

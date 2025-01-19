@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxqexvr8x1kiy"]
 
-[ext_resource type="PackedScene" uid="uid://bt28qygtuoe15" path="res://3D/3DWorld.tscn" id="1_joyrm"]
+[ext_resource type="PackedScene" uid="uid://bt28qygtuoe15" path="res://3D/3DLevelTemplate.tscn" id="1_joyrm"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g4hb6"]
 viewport_path = NodePath("2DSubViewport")
@@ -8,11 +8,6 @@ viewport_path = NodePath("2DSubViewport")
 [sub_resource type="Theme" id="Theme_pcj3g"]
 
 [node name="Level 1" instance=ExtResource("1_joyrm")]
-
-[node name="Board" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-contact_monitor = true
-max_contacts_reported = 10
 
 [node name="Board" parent="Board" index="2"]
 texture = SubResource("ViewportTexture_g4hb6")

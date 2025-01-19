@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddxg8a8ttjnhj"]
+
+[ext_resource type="PackedScene" uid="uid://bt28qygtuoe15" path="res://3D/3DLevelTemplate.tscn" id="1_35uah"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sxpuq"]
+viewport_path = NodePath("2DSubViewport")
+
+[node name="Level 4" instance=ExtResource("1_35uah")]
+
+[node name="Board" parent="Board" index="2"]
+texture = SubResource("ViewportTexture_sxpuq")

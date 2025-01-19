@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b5svasy0xpo0h"
-path="res://.godot/imported/Xolonium-Regular.ttf-f0f9a3b2e7d130c42e9b84ff276fb734.fontdata"
+uid="uid://2fug7ny6t76k"
+path="res://.godot/imported/yoster.ttf-5a22a4da69f89981a227030fcc727eef.fontdata"
 
 [deps]
 
-source_file="res://Resources/Xolonium-Regular.ttf"
-dest_files=["res://.godot/imported/Xolonium-Regular.ttf-f0f9a3b2e7d130c42e9b84ff276fb734.fontdata"]
+source_file="res://Resources/yoster.ttf"
+dest_files=["res://.godot/imported/yoster.ttf-5a22a4da69f89981a227030fcc727eef.fontdata"]
 
 [params]
 

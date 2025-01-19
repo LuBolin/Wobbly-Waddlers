@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://buiwb72hhxj2t"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://53h7nckid616"]
 
 [ext_resource type="PackedScene" uid="uid://boqisulqnlhol" path="res://Objects/Water/water_deco.tscn" id="1_nrjjn"]
 

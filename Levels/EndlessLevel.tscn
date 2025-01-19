@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://blxga136rypaq"]
+[gd_scene load_steps=7 format=4 uid="uid://qtecm0bjl6m0"]
 
 [ext_resource type="Script" path="res://Levels/EndlessLevelManager.gd" id="1_kq4f0"]
 [ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="1_kx5ph"]

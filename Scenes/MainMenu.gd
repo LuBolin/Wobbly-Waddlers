@@ -7,6 +7,7 @@ const lvlFileName = "res://Levels/Level"
 func _ready():
 	for button in buttonsGrid.get_children():
 		button.pressed.connect(func x(): gotoLevel(button.name))
+	$"ControlsGroup/99".pressed.connect(func x(): gotoLevel($"ControlsGroup/99".name))
 	self.renderBeaten()
 
 const numberKeys = [

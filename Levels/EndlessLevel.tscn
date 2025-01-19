@@ -1,28 +1,28 @@
 [gd_scene load_steps=7 format=4 uid="uid://blxga136rypaq"]
 
-[ext_resource type="Script" path="res://Levels/EndlessLevelManager.gd" id="1_uq5yu"]
-[ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="2_c0rer"]
-[ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="3_yqgyb"]
-[ext_resource type="Shader" path="res://Scenes/ShifitingTexture.gdshader" id="4_2nj8k"]
-[ext_resource type="Texture2D" uid="uid://ojue2qysf3pu" path="res://Resources/red_dash.png" id="5_kruy3"]
+[ext_resource type="Script" path="res://Levels/EndlessLevelManager.gd" id="1_kq4f0"]
+[ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="1_kx5ph"]
+[ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="2_mw2o3"]
+[ext_resource type="Shader" path="res://Scenes/ShifitingTexture.gdshader" id="3_v6x8v"]
+[ext_resource type="Texture2D" uid="uid://ojue2qysf3pu" path="res://Resources/red_dash.png" id="4_is5tk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rc8ux"]
-shader = ExtResource("4_2nj8k")
+shader = ExtResource("3_v6x8v")
 shader_parameter/speed = 1.0
 
 [node name="EndlessLevel" type="Node2D"]
-script = ExtResource("1_uq5yu")
+script = ExtResource("1_kq4f0")
 
 [node name="Terrain" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAACAP//AQAAAAAAAADy//f/AAABAAEAAADy//j/AAABAAEAAADy//n/AAABAAEAAADy//r/AAABAAEAAADy//v/AAABAAEAAADy//z/AAABAAEAAADy//3/AAABAAEAAADy//7/AAABAAEAAADy////AAABAAEAAADy/wAAAAABAAEAAADy/wEAAAABAAEAAADy/wIAAAABAAEAAADy/wMAAAABAAEAAADy/wQAAAABAAEAAADy/wUAAAABAAEAAADy/wYAAAABAAEAAADy/wcAAAABAAEAAADy/wgAAAABAAEAAADz/wgAAAABAAEAAAD0/wgAAAABAAEAAAD1/wgAAAABAAEAAAD2/wgAAAABAAEAAAD3/wgAAAABAAEAAAD4/wgAAAABAAEAAAD5/wgAAAABAAEAAAD6/wgAAAABAAEAAAD7/wgAAAABAAEAAAD8/wgAAAABAAEAAAD9/wgAAAABAAEAAAD+/wgAAAABAAEAAAD//wgAAAABAAEAAAAAAAgAAAABAAEAAAABAAgAAAABAAEAAAACAAgAAAABAAEAAAADAAgAAAABAAEAAAAEAAgAAAABAAEAAAAFAAgAAAABAAEAAAAGAAgAAAABAAEAAAAHAAgAAAABAAEAAAAIAAgAAAABAAEAAAAJAAgAAAABAAEAAAAKAAgAAAABAAEAAAALAAgAAAABAAEAAAAMAAgAAAABAAEAAAANAAgAAAABAAEAAAANAPf/AAABAAEAAAANAPj/AAABAAEAAAANAPn/AAABAAEAAAANAPr/AAABAAEAAAANAPv/AAABAAEAAAANAPz/AAABAAEAAAANAP3/AAABAAEAAAANAP7/AAABAAEAAAANAP//AAABAAEAAAANAAAAAAABAAEAAAANAAEAAAABAAEAAAANAAIAAAABAAEAAAANAAMAAAABAAEAAAANAAQAAAABAAEAAAANAAUAAAABAAEAAAANAAYAAAABAAEAAAANAAcAAAABAAEAAADz//f/AAABAAEAAAD0//f/AAABAAEAAAD1//f/AAABAAEAAAD2//f/AAABAAEAAAD3//f/AAABAAEAAAD4//f/AAABAAEAAAD5//f/AAABAAEAAAD6//f/AAABAAEAAAD7//f/AAABAAEAAAD8//f/AAABAAEAAAD9//f/AAABAAEAAAD+//f/AAABAAEAAAD///f/AAABAAEAAAAAAPf/AAABAAEAAAABAPf/AAABAAEAAAACAPf/AAABAAEAAAADAPf/AAABAAEAAAAEAPf/AAABAAEAAAAFAPf/AAABAAEAAAAGAPf/AAABAAEAAAAHAPf/AAABAAEAAAAIAPf/AAABAAEAAAAJAPf/AAABAAEAAAAKAPf/AAABAAEAAAALAPf/AAABAAEAAAAMAPf/AAABAAEAAAA=")
-tile_set = ExtResource("2_c0rer")
+tile_set = ExtResource("1_kx5ph")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="InputDelayTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="Hud" parent="." instance=ExtResource("3_yqgyb")]
+[node name="Hud" parent="." instance=ExtResource("2_mw2o3")]
 
 [node name="StandIndicatorLine" type="Line2D" parent="."]
 top_level = true
@@ -30,5 +30,5 @@ texture_filter = 1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_rc8ux")
 points = PackedVector2Array(0, -324, 0, 324)
-texture = ExtResource("5_kruy3")
+texture = ExtResource("4_is5tk")
 texture_mode = 1

@@ -1191,38 +1191,6 @@ text = "Reset Beaten Levels"
 volume_db = 20.0
 autoplay = true
 
-[node name="99" type="Button" parent="ControlsGroup"]
-offset_left = 2.0
-offset_top = 191.0
-offset_right = 395.0
-offset_bottom = 247.0
-theme_override_fonts/font = ExtResource("4_0hbbv")
-theme_override_font_sizes/font_size = 24
-text = "Endless"
-icon = ExtResource("5_6dkvk")
-icon_alignment = 2
-
-[node name="red_tick" type="TextureRect" parent="ControlsGroup/99"]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
-texture = ExtResource("6_meajj")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ControlsGroup/99"]
-layout_mode = 0
-offset_right = 181.0
-offset_bottom = 40.0
-theme_override_fonts/normal_font = ExtResource("4_0hbbv")
-text = "EXPERIMENTAL"
-
 [node name="edges for help in render" type="Node2D" parent="."]
 
 [node name="edge" type="Line2D" parent="edges for help in render"]

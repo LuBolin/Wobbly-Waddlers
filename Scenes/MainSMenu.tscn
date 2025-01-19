@@ -81,26 +81,11 @@ texture = ExtResource("2_gr06j")
 
 [node name="ControlsGroup" type="Node2D" parent="."]
 
-[node name="Title_CN" type="Label" parent="ControlsGroup"]
-offset_left = 101.0
-offset_top = -128.0
-offset_right = 485.0
-offset_bottom = -15.0
-rotation = -0.254382
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_constants/shadow_outline_size = 30
-theme_override_fonts/font = ExtResource("3_4gpmn")
-theme_override_font_sizes/font_size = 96
-text = "嘎嘎"
-
 [node name="Title_EN" type="Label" parent="ControlsGroup"]
-offset_left = -397.0
-offset_top = -316.0
-offset_right = 398.0
-offset_bottom = -165.0
+offset_left = -537.0
+offset_top = -299.0
+offset_right = 258.0
+offset_bottom = 6.0
 theme_override_colors/font_color = Color(0.866667, 0.866667, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -108,7 +93,8 @@ theme_override_constants/outline_size = 20
 theme_override_constants/shadow_outline_size = 30
 theme_override_fonts/font = ExtResource("3_4gpmn")
 theme_override_font_sizes/font_size = 128
-text = "Hack&Roll"
+text = "Wobbly
+Waddlers"
 
 [node name="author" type="Label" parent="ControlsGroup"]
 offset_left = -242.0
@@ -126,10 +112,10 @@ text = "By Team 45 Inches"
 horizontal_alignment = 2
 
 [node name="LevelButtons" type="GridContainer" parent="ControlsGroup"]
-offset_left = -426.0
-offset_top = -101.0
-offset_right = -26.0
-offset_bottom = 123.0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 406.0
+offset_bottom = 232.0
 scale = Vector2(1.6, 1.6)
 columns = 3
 
@@ -270,6 +256,7 @@ grow_vertical = 0
 texture = ExtResource("6_meajj")
 
 [node name="ComingSoon" type="Label" parent="ControlsGroup"]
+visible = false
 offset_left = -423.0
 offset_top = 140.0
 offset_right = -1.0

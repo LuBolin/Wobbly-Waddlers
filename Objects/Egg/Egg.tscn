@@ -15,6 +15,6 @@ texture = ExtResource("1_bxld8")
 sprite_frames = ExtResource("3_p35tv")
 animation = &"wobble"
 autoplay = "wobble"
-frame_progress = 0.188451
+frame_progress = 0.0966041
 
 [node name="hatch" type="AudioStreamPlayer2D" parent="."]

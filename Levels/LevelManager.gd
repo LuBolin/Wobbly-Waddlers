@@ -24,6 +24,7 @@ var lingering_input: InputEventKey
 var stand_x_val: float
 var ended: bool = false
 var thisLevelNumber: int
+var goal_egg_count: int
 
 func _ready():
 	level_size = terrain.get_used_rect().size
@@ -69,6 +70,7 @@ func parse_tilemaplayer():
 		crate_coord_array[crate_coords.y - level_offset.y][crate_coords.x - level_offset.x] = crate
 		terrain.set_cell(crate_coords, -1)
 
+	goal_egg_count = len(terrain.get_used_cells_by_id(3))
 	for egg_coords in terrain.get_used_cells_by_id(3):
 		var egg_world_pos = tile_to_world(egg_coords)
 		var egg = Egg.summonEgg()

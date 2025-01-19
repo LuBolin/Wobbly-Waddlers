@@ -12,10 +12,9 @@ visible = false
 texture = ExtResource("1_bxld8")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("3_p35tv")
 animation = &"wobble"
 autoplay = "wobble"
-frame_progress = 0.242453
+frame_progress = 0.188451
 
 [node name="hatch" type="AudioStreamPlayer2D" parent="."]

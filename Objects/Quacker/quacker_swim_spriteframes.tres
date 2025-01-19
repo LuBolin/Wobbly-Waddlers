@@ -2,37 +2,37 @@
 
 [ext_resource type="Texture2D" uid="uid://ceq5cooatubhb" path="res://Resources/quacker_swim_anim.png" id="1_vyhwy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufqbj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwjmi"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(0, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gcray"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0tls"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(48, 0, 48, 48)
+region = Rect2(256, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kiyda"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmivl"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(96, 0, 48, 48)
+region = Rect2(512, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_okhix"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee1y5"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(768, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vrffb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pry7"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(192, 0, 48, 48)
+region = Rect2(1024, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_grdoq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u2on"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(240, 0, 48, 48)
+region = Rect2(1280, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wv5pc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mjoq"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(288, 0, 48, 48)
+region = Rect2(1536, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3iyko"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtf6m"]
 atlas = ExtResource("1_vyhwy")
-region = Rect2(336, 0, 48, 48)
+region = Rect2(1792, 0, 256, 256)
 
 [resource]
 animations = [{
@@ -43,28 +43,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ufqbj")
+"texture": SubResource("AtlasTexture_qwjmi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gcray")
+"texture": SubResource("AtlasTexture_h0tls")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kiyda")
+"texture": SubResource("AtlasTexture_nmivl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_okhix")
+"texture": SubResource("AtlasTexture_ee1y5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vrffb")
+"texture": SubResource("AtlasTexture_1pry7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_grdoq")
+"texture": SubResource("AtlasTexture_1u2on")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wv5pc")
+"texture": SubResource("AtlasTexture_8mjoq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3iyko")
+"texture": SubResource("AtlasTexture_rtf6m")
 }],
 "loop": true,
 "name": &"swim",

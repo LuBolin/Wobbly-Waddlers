@@ -1,7 +1,7 @@
 extends Node3D
 
 const lvlFileName = "res://Levels/Level"
-
+var twod_scene: LevelManager
 @export_range(-5, 5) var stand_x_offset: float
 
 func _ready():
@@ -16,5 +16,12 @@ func _ready():
 	
 	var level_number: int = int(self.name.substr(len("Level ")))
 	var scene_name = lvlFileName + str(level_number) + "_2D.tscn"
-	var scene = load(scene_name).instantiate()
-	$"2DSubViewport".add_child(scene)
+	twod_scene = load(scene_name).instantiate()
+	$"2DSubViewport".add_child(twod_scene)
+
+func _process(delta: float) -> void:
+	if not twod_scene:
+		return
+	var duckling_count = len(twod_scene.ducklings)
+	# var total_count = twod_scene.goal_egg_count
+	%DucklingCountLabel.text = str(duckling_count)

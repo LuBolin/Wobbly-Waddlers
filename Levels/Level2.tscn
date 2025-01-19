@@ -9,6 +9,3 @@ viewport_path = NodePath("2DSubViewport")
 
 [node name="Board" parent="Board" index="2"]
 texture = SubResource("ViewportTexture_ssii1")
-
-[node name="Background" parent="Control/HBoxContainer/InfoPanel/InfoPanel/SubViewMargin/TiltViewport/SideSubViewport/Camera3D2" index="0"]
-modulate = Color(0.264353, 0.554207, 0.902462, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/LevelManager.gd" id="1_ykndm"]
 [ext_resource type="TileSet" uid="uid://cl4jo0ip1xd53" path="res://Resources/base_tileset.tres" id="2_x0qaq"]
-[ext_resource type="TileSet" uid="uid://buiwb72hhxj2t" path="res://Resources/decoration_tileset.tres" id="3_ed64e"]
+[ext_resource type="TileSet" uid="uid://53h7nckid616" path="res://Resources/decoration_tileset.tres" id="3_ed64e"]
 [ext_resource type="Texture2D" uid="uid://ojue2qysf3pu" path="res://Resources/red_dash.png" id="4_4rta2"]
 [ext_resource type="Shader" path="res://Scenes/ShifitingTexture.gdshader" id="4_sivo7"]
 

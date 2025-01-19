@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt28qygtuoe15"]
+[gd_scene load_steps=16 format=3 uid="uid://dfte568r5jhra"]
 
 [ext_resource type="Script" path="res://3D/3DManager.gd" id="1_386cp"]
 [ext_resource type="PhysicsMaterial" path="res://3D/board_strong_friction_physics_material.tres" id="3_4kneq"]
@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dtk3srt7sb8f8" path="res://Resources/white.png" id="4_skp1u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_k8nur"]
-size = Vector3(11.5, 0.5, 6.25)
+size = Vector3(10, 1, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hwu3i"]
-size = Vector3(10, 0.5, 6)
+size = Vector3(10, 1, 6)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_760vy"]
 viewport_path = NodePath("2DSubViewport")
@@ -51,8 +51,6 @@ axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 physics_material_override = ExtResource("3_4kneq")
-contact_monitor = true
-max_contacts_reported = 10
 script = ExtResource("3_kg7dr")
 
 [node name="BoardMesh" type="MeshInstance3D" parent="Board"]
@@ -62,7 +60,7 @@ mesh = SubResource("BoxMesh_k8nur")
 shape = SubResource("BoxShape3D_hwu3i")
 
 [node name="Board" type="Sprite3D" parent="Board"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530551, 0)
 axis = 1
 texture = SubResource("ViewportTexture_760vy")
 

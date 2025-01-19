@@ -1,0 +1,180 @@
+[gd_scene load_steps=16 format=3 uid="uid://dfte568r5jhra"]
+
+[ext_resource type="Script" path="res://3D/3DManager.gd" id="1_386cp"]
+[ext_resource type="PhysicsMaterial" path="res://3D/board_strong_friction_physics_material.tres" id="3_4kneq"]
+[ext_resource type="Script" path="res://3D/boardbody.gd" id="3_kg7dr"]
+[ext_resource type="PackedScene" uid="uid://boj2sy3is4apk" path="res://Scenes/HUD.tscn" id="4_8i3vt"]
+[ext_resource type="Texture2D" uid="uid://dtk3srt7sb8f8" path="res://Resources/white.png" id="4_skp1u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8nur"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwu3i"]
+size = Vector3(10, 1, 6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_760vy"]
+viewport_path = NodePath("2DSubViewport")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gh0cd"]
+height = 10.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjp4u"]
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kspr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y10eo"]
+material = SubResource("StandardMaterial3D_1kspr")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k82vx"]
+bottom_radius = 2.0
+height = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rhif"]
+bg_color = Color(0.45241, 0.617176, 0.783913, 1)
+
+[sub_resource type="Theme" id="Theme_l2vb6"]
+
+[node name="3DRoot" type="Node3D"]
+script = ExtResource("1_386cp")
+
+[node name="2DSubViewport" type="SubViewport" parent="."]
+size = Vector2i(1152, 648)
+
+[node name="Board" type="RigidBody3D" parent="."]
+unique_name_in_owner = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+physics_material_override = ExtResource("3_4kneq")
+script = ExtResource("3_kg7dr")
+
+[node name="BoardMesh" type="MeshInstance3D" parent="Board"]
+mesh = SubResource("BoxMesh_k8nur")
+
+[node name="BoardCollider" type="CollisionShape3D" parent="Board"]
+shape = SubResource("BoxShape3D_hwu3i")
+
+[node name="Board" type="Sprite3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530551, 0)
+axis = 1
+texture = SubResource("ViewportTexture_760vy")
+
+[node name="Stand" type="StaticBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+
+[node name="StandMesh" type="MeshInstance3D" parent="Stand"]
+mesh = SubResource("CapsuleMesh_gh0cd")
+
+[node name="StandCollider" type="CollisionShape3D" parent="Stand"]
+shape = SubResource("CapsuleShape3D_xjp4u")
+
+[node name="Stand_Red_Line" type="CPUParticles3D" parent="Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+top_level = true
+lifetime = 5.0
+mesh = SubResource("CylinderMesh_y10eo")
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+color = Color(1, 0, 0, 1)
+
+[node name="ConeMesh" type="MeshInstance3D" parent="Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("CylinderMesh_k82vx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02088, 4.40299)
+omni_range = 30.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8rhif")
+
+[node name="InfoPanel" type="VBoxContainer" parent="Control/HBoxContainer/InfoPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="Control/HBoxContainer/InfoPanel/InfoPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Level 5"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/HBoxContainer/InfoPanel/InfoPanel"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Control/HBoxContainer/InfoPanel/InfoPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Control/HBoxContainer/InfoPanel/InfoPanel"]
+layout_mode = 2
+
+[node name="SubViewMargin" type="MarginContainer" parent="Control/HBoxContainer/InfoPanel/InfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TiltViewport" type="SubViewportContainer" parent="Control/HBoxContainer/InfoPanel/InfoPanel/SubViewMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_l2vb6")
+
+[node name="SideSubViewport" type="SubViewport" parent="Control/HBoxContainer/InfoPanel/InfoPanel/SubViewMargin/TiltViewport"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D2" type="Camera3D" parent="Control/HBoxContainer/InfoPanel/InfoPanel/SubViewMargin/TiltViewport/SideSubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="Background" type="Sprite3D" parent="Control/HBoxContainer/InfoPanel/InfoPanel/SubViewMargin/TiltViewport/SideSubViewport/Camera3D2"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, -64)
+modulate = Color(0.264353, 0.554207, 0.902462, 1)
+texture = ExtResource("4_skp1u")
+
+[node name="VSeparator" type="VSeparator" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="MainViewport" type="SubViewportContainer" parent="Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MainSubViewport" type="SubViewport" parent="Control/HBoxContainer/MainViewport"]
+handle_input_locally = false
+size = Vector2i(894, 648)
+render_target_update_mode = 4
+
+[node name="MainCamera3D" type="Camera3D" parent="Control/HBoxContainer/MainViewport/MainSubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, 5.5, 0.5)
+
+[node name="Hud" parent="." instance=ExtResource("4_8i3vt")]

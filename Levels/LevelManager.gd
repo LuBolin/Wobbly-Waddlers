@@ -160,18 +160,26 @@ func quackerMove(direction: Vector2i):
 	for duckling in ducklings:
 		duckling_tiles.append(world_to_tile(duckling.position))
 	
+	# case when player tries to turn 180 degrees
 	var delta_deg = rad_to_deg(abs(Vector2(direction).angle() - quacker.rotation))
 	delta_deg = snapped(delta_deg, 90)
+	delta_deg = delta_deg % 360
 	if is_equal_approx(delta_deg, 180):
 		for duck_tile in duckling_tiles:
+			# if trying to turn around into a duckling
 			if duck_tile == tile_coords + direction:
 				direction = -direction
+				break
 	
 	var target = tile_coords + direction
 			
 	if target in walls:
 		return false
 	
+	if duckling_tiles:
+		print(duckling_tiles)
+		print(target)
+		print()
 	if target in duckling_tiles:
 		return false
    

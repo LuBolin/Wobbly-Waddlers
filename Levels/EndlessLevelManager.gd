@@ -85,18 +85,21 @@ func endless_drop_random_tiles():
 			eggs.append(item)
 		if item is Crate:
 			crates.append(item)
-			print(crate_coord_array.size())
-			print(crate_coord_array[0].size())
 			crate_coord_array[item_coords.y - level_offset.y][item_coords.x - level_offset.x] = item
 		terrain.set_cell(item_coords, -1)
 
 # Egg, Block
 func endless_choose_random_item():
-	match randi_range(0, 1):
-		0: 
-			return Egg.summonEgg()
-		1:
-			return Crate.summonCrate()
+	#match randi_range(0, 1):
+		#0: 
+			#return Egg.summonEgg()
+		#1:
+			#return Crate.summonCrate()
+	if randi_range(0, 2) == 0:
+		# 1/3 chance
+		return Egg.summonEgg()
+	# 2/3 chance
+	return Crate.summonCrate()
 
 func endless_choose_random_coords():
 	var choice_array = []

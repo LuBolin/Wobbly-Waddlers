@@ -175,11 +175,7 @@ func quackerMove(direction: Vector2i):
 			
 	if target in walls:
 		return false
-	
-	if duckling_tiles:
-		print(duckling_tiles)
-		print(target)
-		print()
+
 	if target in duckling_tiles:
 		return false
    
@@ -225,8 +221,9 @@ func quackerMove(direction: Vector2i):
 			if target == world_to_tile(egg.position):
 				egg.hatch()
 				eggs.remove_at(eggs.find(egg))
-				if len(eggs) == 0:
-					Singleton.win.emit()
+				if not (self is EndlessLevelManager):
+					if len(eggs) == 0:
+						Singleton.win.emit()
 		var target_in_world = tile_to_world(target)
 		quacker.move(target_in_world)
 		return true

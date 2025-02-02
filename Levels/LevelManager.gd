@@ -26,6 +26,8 @@ var ended: bool = false
 var thisLevelNumber: int
 var goal_egg_count: int
 
+var simulation_started: bool = false
+
 func _ready():
 	level_size = terrain.get_used_rect().size
 	level_offset = terrain.get_used_rect().position
@@ -113,7 +115,7 @@ func _input(event):
 func handle_input():
 	if ended:
 		return
-		
+	
 	if input_buffer:
 		lingering_input = input_buffer.front()
 		input_buffer.pop_front()
@@ -121,6 +123,10 @@ func handle_input():
 	var event = lingering_input
 	if not event:
 		return
+	
+	if not simulation_started:
+		simulation_started = true
+		Singleton.start_level.emit()
 	
 	var anythingMoved = false
 	

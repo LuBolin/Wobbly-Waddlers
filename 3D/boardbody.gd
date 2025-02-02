@@ -14,6 +14,10 @@ func _ready() -> void:
 	Singleton.win.connect(
 		func(): self.set_physics_process(false)
 	)
+	self.set_physics_process(false)
+	Singleton.start_level.connect(
+		func(): self.set_physics_process(true)
+	)
 
 func _physics_process(delta: float) -> void:
 	if not _2d_sub_viewport.get_child_count() > 0:
@@ -21,7 +25,6 @@ func _physics_process(delta: float) -> void:
 	tilt_board_based_on_masses(delta)
 
 func on_body_exited(body: Node3D):
-	print("BOdy exited!!")
 	if body == %Stand and abs(self.rotation.z) > PI/4.0:
 		Singleton.lose.emit()
 

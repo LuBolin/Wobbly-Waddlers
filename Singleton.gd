@@ -3,6 +3,7 @@ signal win
 signal lose
 signal restart
 signal to_menu
+signal start_level
 
 const SAVE_FILE_PATH = "user://saves/LevelsBeaten.dat"
 

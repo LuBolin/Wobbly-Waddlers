@@ -7,7 +7,7 @@ func _ready():
 	
 	Singleton.restart.connect(self.restart_level)
 	
-	inputDelayTimer.set_wait_time(Global.TICK_DURATION / 2)
+	inputDelayTimer.set_wait_time(Global.TICK_DURATION)
 	
 	inputDelayTimer.timeout.connect(alternate_cycle_update)
 	
@@ -18,11 +18,13 @@ func _ready():
 
 var parity = 1
 func alternate_cycle_update():
-	if parity > 0:
-		endless_drop_random_tiles()
-	else:
-		handle_input()
-	parity *= -1
+	#if parity > 0:
+		#endless_drop_random_tiles()
+	#else:
+		#handle_input()
+	#parity *= -1
+	endless_drop_random_tiles()
+	handle_input()
 
 
 
@@ -53,7 +55,7 @@ func endless_drop_random_tiles():
 					crates.remove_at(j)
 					break
 			c.queue_free()
-	for i in range(level_size.y):
+	for i in range(level_size.x):
 		if crate_coord_array[1][i] is Crate:
 			var c = crate_coord_array[1][i]
 			crate_coord_array[1][i] = 0
@@ -76,9 +78,11 @@ func endless_drop_random_tiles():
 	if ticks_since_last_tile >= TICKS_UNTIL_NEXT_TILE:
 		ticks_since_last_tile = 0
 		#drop item
-		var item = endless_choose_random_item()
 		var item_coords = endless_choose_random_coords()
-		print(item_coords)
+		#print(item_coords)
+		if item_coords == null:
+			return
+		var item = endless_choose_random_item()
 		item.global_position = tile_to_world(item_coords)
 		add_child.call_deferred(item)
 		if item is Egg:
@@ -101,18 +105,29 @@ func endless_choose_random_item():
 	# 2/3 chance
 	return Crate.summonCrate()
 
+# returns tile coordinate, good luck figuring out what that means cus idk but it works
+const QUACKER_INVALID_SPAWN_RADIUS = 3 # Cannot spawn within X tiles of Quacker
 func endless_choose_random_coords():
 	var choice_array = []
 	for i in range(2, level_size.y - 2):
 		for j in range(2, level_size.x - 2):
 			if crate_coord_array[i][j] is Crate:
 				continue
+			var selected_coord = Vector2i(j + level_offset.x, i + level_offset.y)
+			var invalid = false
 			for egg in eggs:
-				if tile_to_world(Vector2(j, i)) == egg.global_position:
-					continue
+				if selected_coord == world_to_tile(egg.global_position):
+					invalid = true
+					break
 			for duck in ducklings:
-				if tile_to_world(Vector2(j, i)) == duck.global_position:
-					continue
-			choice_array.append([i, j])
+				if selected_coord == world_to_tile(duck.global_position):
+					invalid = true
+					break
+			if selected_coord.distance_to(world_to_tile(quacker.global_position)) < QUACKER_INVALID_SPAWN_RADIUS:
+				invalid = true
+			if not invalid:
+				choice_array.append([i, j])
 	var chosen = choice_array.pick_random()
-	return Vector2(chosen[1] + level_offset.x, chosen[0] + level_offset.y)
+	if chosen == null:
+		return null
+	return Vector2i(chosen[1] + level_offset.x, chosen[0] + level_offset.y)
